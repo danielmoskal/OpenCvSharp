@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenCvSharp.Infrastructure.Abstract
 {
-    public interface ISample
+    public interface ISiftMatcher
     {
-        void Run();
+        void Execute(double contrastTreshold = 0.04, double sigma = 1.6, double ratioThresh = 0.8);
     }
 }
