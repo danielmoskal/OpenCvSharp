@@ -47,6 +47,9 @@ namespace OpenCvSharp.Infrastructure.Const
             public const string Match2 = "Data/Image/match2.png";
             public const string Gesture1 = "Data/Image/gesture1_0_0_0_kolor.bmp";
             public const string Gesture2 = "Data/Image/gesture1_0_10_0_kolor.bmp";
+            public const string Gesture3 = "Data/Image/gesture1_0_20_0_kolor.bmp";
+            public const string Gesture4 = "Data/Image/gesture1_0_30_0_kolor.bmp";
+            public const string Gesture5 = "Data/Image/gesture1_0_40_0_kolor.bmp";
         }
 
         public static class Text

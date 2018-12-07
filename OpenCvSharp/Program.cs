@@ -30,7 +30,7 @@ namespace OpenCvSharp
             //siftMatcher.Execute(0.01, 1.4, 0.6);
             //siftMatcher.Execute(0.01, 1.5, 0.6);
             //siftMatcher.Execute(0.01, 1.6, 0.6);
-            siftMatcher.Execute(0.01, 1.7, 0.6);
+            //siftMatcher.Execute(0.01, 1.7, 0.6);
 
             //siftMatcher.Execute(0.01, 1.2, 0.7);
             //siftMatcher.Execute(0.01, 1.3, 0.7);
@@ -83,7 +83,7 @@ namespace OpenCvSharp
 
             //siftMatcher.Execute(0.03, 1.2, 0.6);
             //siftMatcher.Execute(0.03, 1.3, 0.6);
-            //siftMatcher.Execute(0.03, 1.4, 0.6);
+            siftMatcher.Execute(0.03, 1.4, 0.6);
             //siftMatcher.Execute(0.03, 1.5, 0.6);
             //siftMatcher.Execute(0.03, 1.6, 0.6);
             //siftMatcher.Execute(0.03, 1.7, 0.6);
