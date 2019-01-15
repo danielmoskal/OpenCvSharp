@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenCvSharp.Infrastructure.Concrete
 {
-    public class SiftSurf : IMatcher
+    public class SiftSurf : IFeatures
     {
         public void Execute()
         {

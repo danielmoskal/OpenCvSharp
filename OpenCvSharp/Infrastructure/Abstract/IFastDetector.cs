@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenCvSharp.Infrastructure.Abstract
 {
-    public interface IMatcher
+    public interface IFastDetector
     {
-        void Execute();
+        void Execute(int threshold, bool nonmaxSupression);
     }
 }

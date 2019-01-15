@@ -60,15 +60,81 @@ namespace OpenCvSharp.Infrastructure.Concrete
                     }
                 }
             }
+            var arrayOfMatches = listOfGoodFlannMatches.ToArray();
+            IList<DMatch> listOfMatches = new List<DMatch>();
+            //listOfMatches.Add(arrayOfMatches[6]);
+            //listOfMatches.Add(arrayOfMatches[7]);
+            //listOfMatches.Add(arrayOfMatches[15]);
+            listOfMatches.Add(arrayOfMatches[0]);
+            listOfMatches.Add(arrayOfMatches[1]);
+            listOfMatches.Add(arrayOfMatches[2]);
+            listOfMatches.Add(arrayOfMatches[3]);
+            listOfMatches.Add(arrayOfMatches[4]);
+            listOfMatches.Add(arrayOfMatches[5]);
+            listOfMatches.Add(arrayOfMatches[8]);
+            listOfMatches.Add(arrayOfMatches[9]);
+            listOfMatches.Add(arrayOfMatches[10]);
+            listOfMatches.Add(arrayOfMatches[11]);
+            KeyPoint[] P1s = new KeyPoint[13];
+            KeyPoint[] P2s = new KeyPoint[13];
+            for (int i = 0, j = 0; i < 13; i++, j++)
+            {
+                if (j == 6)
+                {
+                    j = 8;
+                }
+
+                P1s[i] = keypoints1[arrayOfMatches[j].QueryIdx];
+                P2s[i] = keypoints2[arrayOfMatches[j].TrainIdx];
+            }
+
+            for (int i = 0; i < P1s.Length; i++)
+            {
+                Console.WriteLine($"P1[{i}]: {P1s[i].Pt.X}  {P1s[i].Pt.Y}");
+            }
+            Console.WriteLine($"\n P2 points: ");
+            for (int i = 0; i < P2s.Length; i++)
+            {
+                Console.WriteLine($"P2[{i}]: {P2s[i].Pt.X}  {P2s[i].Pt.Y}");
+            }
+
+            MatOfPoint2f source = new MatOfPoint2f();
+            MatOfPoint2f descination = new MatOfPoint2f();
+            MatOfPoint2f a = new MatOfPoint2f();
+            double[,] data = new double[12, 12];
+            for (int i = 0; i < P1s.Length; i++)
+            {
+                source.Add(P1s[i].Pt);
+                descination.Add(P2s[i].Pt);
+            }
+            var s = source.ToArray();
+            var d = descination.ToArray();
+            Mat homography = Cv2.FindHomography(descination, source);
+            homography.GetArray(0, 1, data);
+            homography.ConvertTo(a, 5);
+            var b = a.ToPrimitiveArray();
+            //var b = homography.GetArray(0, 1);
+            //var c = homography.ToBytes();
+            //VectorOfPoint2f vectorOfPoint2F = new VectorOfPoint2f(homography.Rows * homography.Cols);
+            //if (homography.IsContinuous())
+            //    vectorOfPoint2F = homography.Data;
+
 
             // Draw matches
+            var img1WithPoints = new Mat();
+            Cv2.DrawKeypoints(gray1, P1s, img1WithPoints, Scalar.Red);
+            var img2WithPoints = new Mat();
+            Cv2.DrawKeypoints(gray2, P2s, img2WithPoints, Scalar.Red);
+            var knnFlannView2 = new Mat();
+
+            Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, listOfMatches.ToArray(), knnFlannView2, Scalar.Red);
             var knnBfView = new Mat();
             Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, listOfGoodBfMatches.ToArray(), knnBfView);
             var bfView = new Mat();
             Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, bfMatches, bfView);
 
             var knnFlannView = new Mat();
-            Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, listOfGoodFlannMatches.ToArray(), knnFlannView);
+            Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, listOfGoodFlannMatches.ToArray(), knnFlannView, Scalar.Green, Scalar.Red);
             var flannView = new Mat();
             Cv2.DrawMatches(gray1, keypoints1, gray2, keypoints2, flannMatches, flannView);
 
@@ -85,12 +151,15 @@ namespace OpenCvSharp.Infrastructure.Concrete
             Console.WriteLine("\tsigma: " + sigma);
             Console.WriteLine("ratio thresh: " + ratioThresh);
 
-            using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnBfView))
-            using (new Window($"SIFT (BFMather)({contrastTreshold})({sigma})({bfMatches.Length})", WindowMode.AutoSize, bfView))
-            using (new Window($"SIFT (knnFlannBasedMatcher)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodFlannMatches.Count})", WindowMode.AutoSize, knnFlannView))
-            using (new Window($"SIFT (FlannBasedMatcher)({contrastTreshold})({sigma})({flannMatches.Length})", WindowMode.AutoSize, flannView))
+            using (new Window($"SIFT (img1WithPoints)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, img1WithPoints))
+            using (new Window($"SIFT (img2WithPoints)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, img2WithPoints))
+            using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnFlannView2))
+            //using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnBfView))
+            //using (new Window($"SIFT (BFMather)({contrastTreshold})({sigma})({bfMatches.Length})", WindowMode.AutoSize, bfView))
+            //using (new Window($"SIFT (knnFlannBasedMatcher)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodFlannMatches.Count})", WindowMode.AutoSize, knnFlannView))
+            //using (new Window($"SIFT (FlannBasedMatcher)({contrastTreshold})({sigma})({flannMatches.Length})", WindowMode.AutoSize, flannView))
             {
-                
+
             }
         }
     }

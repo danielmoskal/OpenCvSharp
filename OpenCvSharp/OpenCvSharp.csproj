@@ -58,11 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Abstract\IFastDetector.cs" />
     <Compile Include="Infrastructure\Abstract\ISiftMatcher.cs" />
+    <Compile Include="Infrastructure\Concrete\FastDetector.cs" />
     <Compile Include="Infrastructure\Concrete\SiftMatcher.cs" />
     <Compile Include="Infrastructure\Const\FilePath.cs" />
     <Compile Include="Infrastructure\Concrete\SiftSurf.cs" />
-    <Compile Include="Infrastructure\Abstract\IMatcher.cs" />
+    <Compile Include="Infrastructure\Abstract\IFeatures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
