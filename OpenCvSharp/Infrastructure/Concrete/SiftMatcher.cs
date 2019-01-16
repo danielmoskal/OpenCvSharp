@@ -153,9 +153,9 @@ namespace OpenCvSharp.Infrastructure.Concrete
 
             using (new Window($"SIFT (img1WithPoints)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, img1WithPoints))
             using (new Window($"SIFT (img2WithPoints)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, img2WithPoints))
-            using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnFlannView2))
-            //using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnBfView))
-            //using (new Window($"SIFT (BFMather)({contrastTreshold})({sigma})({bfMatches.Length})", WindowMode.AutoSize, bfView))
+            //using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnFlannView2))
+            using (new Window($"SIFT (knnBFMather)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodBfMatches.Count})", WindowMode.AutoSize, knnBfView))
+            using (new Window($"SIFT (BFMather)({contrastTreshold})({sigma})({bfMatches.Length})", WindowMode.AutoSize, bfView))
             //using (new Window($"SIFT (knnFlannBasedMatcher)({contrastTreshold})({sigma})({ratioThresh})({listOfGoodFlannMatches.Count})", WindowMode.AutoSize, knnFlannView))
             //using (new Window($"SIFT (FlannBasedMatcher)({contrastTreshold})({sigma})({flannMatches.Length})", WindowMode.AutoSize, flannView))
             {
